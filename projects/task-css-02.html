@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>CSS按钮样式练习</title>
+  <style type="text/css">
+  	*{
+	  padding: 0;
+	  margin: 0;
+	}
+	.layout{
+	  width: 600px;
+	  margin: 0 auto;
+	}
+	.ct{
+	  margin-top: 30px;
+	  text-align: center;
+	}
+	.btn{
+	  display: inline-block;
+	}
+	.color{
+	  padding: 8px 10px;
+	  text-decoration: none;
+	  border-radius: 3px;
+	  cursor: pointer; /*加不加都是这个效果*/
+	  transition: all .3s; 
+	}
+	.color:hover{
+	  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	  /*
+	  语法: box-shadow: h-shadow v-shadow blur spread color inset;
+	  注释：box-shadow 向框添加一个或多个阴影。该属性是由逗号分隔的阴影列表，每个阴影由 2-4 个长度值、可选的颜色值以及可选的 inset 关键词来规定。省略长度的值是 0。
+	  */
+	}
+	.steal{
+	  background-color: #009688;
+	  color: #fff;
+	}
+	.yellow{
+	  background-color: yellow;
+	  color: #000;
+	}
+	.orange{
+	  background-color: orange;
+	  color: #000;
+	}
+	.red{
+	  background-color: red;
+	  color: #fff;
+	}
+	.green{
+	  background-color: green;
+	  color: #fff;
+	}
+  </style>
+</head>
+<body>
+<div class="layout">
+  <ul class="ct">
+    <li class="btn"><a href="#" class="color steal">steal</a></li>
+    <li class="btn"><a href="#" class="color yellow">yellow</a></li>
+    <li class="btn"><a href="#" class="color orange">orange</a></li>
+    <li class="btn"><a href="#" class="color red">red</a></li>
+    <li class="btn"><a href="#" class="color green">green</a></li>
+  </ul>  
+</div>
+</body>
+</html>
