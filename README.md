@@ -16,4 +16,6 @@
 <p>
   利用边框实现多样式三角形练习[demo](https://sam-pig.github.io/front-end/projects/task-css-04.html)
 </p>
-
+<p>
+ 项目汇总门户页面粗制练习[demo](https://sam-pig.github.io/front-end/projects/task-css-05.html)
+</p>
