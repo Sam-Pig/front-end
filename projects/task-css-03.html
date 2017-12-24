@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CSS表格多样式实现练习</title>
+  <style type="text/css">
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    .layout{
+      width: 600px;
+      margin: 0 auto;
+      font-family: arial;
+    }
+    .tb{
+      margin-top: 30px;
+      text-align: left; /*默认样式*/
+      border-collapse: collapse; /*设置表格的边框是否被合并为一个单一的边框，还是像在标准的 HTML 中那样分开显示。*/
+      border-spacing: 0; /*设置相邻单元格的边框间的距离（仅用于“border-collapse:separate”模式，所以此处其实不必写）。*/
+      width: 100%;
+    }
+    .tb th,td{
+      padding: 8px 8px;
+    }
+    .tb tr:nth-child(even){
+      background-color: #f1f1f1;
+    }
+    .green{
+      border: 1px solid #ccc;
+    }
+    .tb tr{
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+    .green tr:first-child{
+      background-color: #4CAF50;
+      color: #fff;
+    }
+    .white{
+      border: none;
+    }
+    .white tr:first-child{
+        border-top: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <table class="green tb">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Points</th>
+        </tr>
+        <tr>
+            <td>Jill</td>
+            <td>Smith</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Eve</td>
+            <td>Jackson</td>
+            <td>94</td>
+        </tr>
+        <tr>
+            <td>Adam</td>
+            <td>Johnson</td>
+            <td>67</td>
+        </tr>
+        <tr>
+            <td>Bo</td>
+            <td>Nilsson</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Mike</td>
+            <td>Ross</td>
+            <td>35</td>
+        </tr>
+    </table>
+    <table class="white tb">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Points</th>
+        </tr>
+        <tr>
+            <td>Jill</td>
+            <td>Smith</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Eve</td>
+            <td>Jackson</td>
+            <td>94</td>
+        </tr>
+        <tr>
+            <td>Adam</td>
+            <td>Johnson</td>
+            <td>67</td>
+        </tr>
+        <tr>
+            <td>Bo</td>
+            <td>Nilsson</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Mike</td>
+            <td>Ross</td>
+            <td>35</td>
+        </tr>
+    </table>
+  </div>
+</body>
+</html>
