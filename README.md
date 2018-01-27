@@ -22,3 +22,6 @@
 <p>
  CSS Sprites使用练习[demo](https://sam-pig.github.io/front-end/projects/task-css-06.html)
 </p>
+<p>
+ 使用iconfont实现字体图标的练习[demo](https://sam-pig.github.io/front-end/projects/task-css-07.html)
+</p>
