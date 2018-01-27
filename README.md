@@ -19,3 +19,6 @@
 <p>
  项目汇总门户页面粗制练习[demo](https://sam-pig.github.io/front-end/projects/task-css-05.html)
 </p>
+<p>
+ CSS Sprites使用练习[demo](https://sam-pig.github.io/front-end/projects/task-css-06.html)
+</p>
