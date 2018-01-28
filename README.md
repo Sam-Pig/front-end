@@ -25,3 +25,6 @@
 <p>
  使用iconfont实现字体图标的练习[demo](https://sam-pig.github.io/front-end/projects/task-css-07.html)
 </p>
+<p>
+ 关于relative、absolute、fixed和z-index的练习[demo](https://sam-pig.github.io/front-end/projects/task-css-08.html)
+</p>
