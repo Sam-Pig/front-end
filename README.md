@@ -34,3 +34,6 @@
 <p>
  普通练习[demo](https://sam-pig.github.io/front-end/projects/task-css-10.html)
 </p>
+<p>
+ 画册布局练习[demo](https://sam-pig.github.io/front-end/projects/task-css-11.html)
+</p>
