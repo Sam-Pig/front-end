@@ -31,3 +31,6 @@
 <p>
  关于二级导航栏的练习[demo](https://sam-pig.github.io/front-end/projects/task-css-09.html)
 </p>
+<p>
+ 普通练习[demo](https://sam-pig.github.io/front-end/projects/task-css-10.html)
+</p>
