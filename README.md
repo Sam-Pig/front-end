@@ -37,3 +37,27 @@
 <p>
  画册布局练习[demo](https://sam-pig.github.io/front-end/projects/task-css-11.html)
 </p>
+<p>
+ 二列布局练习[demo](https://sam-pig.github.io/front-end/projects/task-css-13.html)
+</p>
+<p>
+ 三列布局练习[demo](https://sam-pig.github.io/front-end/projects/task-css-14.html)
+</p>
+<p>
+ 块级元素固定宽度、水平居中练习[demo](https://sam-pig.github.io/front-end/projects/task-css-15.html)
+</p>
+<p>
+ 大段文字在容器内水平垂直居中练习[demo](https://sam-pig.github.io/front-end/projects/task-css-16.html)
+</p>
+<p>
+ 并列三个按钮，在父容器内水平居中练习[demo](https://sam-pig.github.io/front-end/projects/task-css-17.html)
+</p>
+<p>
+ 图片在容器内水平垂直居中，容器宽高大于图片宽高练习[demo](https://sam-pig.github.io/front-end/projects/task-css-18.html)
+</p>
+<p>
+ 固定宽高的块在浏览器窗口水平垂直居中练习[demo](https://sam-pig.github.io/front-end/projects/task-css-19.html)
+</p>
+<p>
+ 不定宽高的块在浏览器窗口水平垂直居中练习[demo](https://sam-pig.github.io/front-end/projects/task-css-20.html)
+</p>
