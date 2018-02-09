@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>不定宽高的块在浏览器窗口水平垂直居中练习</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .box {
+        background: #ccc;
+        text-align: center;
+/*--------------实现水平垂直居中的作用代码---------------------*/
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%); 
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h1>这是标题</h1>
+      <p>这个块不定宽高。可以用transform属性实现垂直居中。</p>
+    </div>
+  </body>
+</html>

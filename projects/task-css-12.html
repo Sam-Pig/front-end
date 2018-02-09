@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>关于外边距合并问题的研究练习</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: pink;
+    }
+    .box1 {
+      background: blue;
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+    }
+    .box2 {
+      background: yellow;
+      margin: 40px 0;
+    }
+    .p1 {
+      background: #fff;
+      margin: 50px 0;  
+    }
+    .p2 {
+      background: red;
+      margin-top: 40px;
+    }
+    .p3 {
+      background: #fff;
+      margin: 50px 0 40px 0;
+    }
+    .p4 {
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="box1">
+    <div class="box2">
+      <p class="p1">p1</p>
+      <p class="p2">p2</p>
+      <p class="p3"></p>
+      <p class="p4">p4</p>
+    </div>
+  </div>
+</body>
+</html>

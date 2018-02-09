@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>图片在容器内水平垂直居中，容器宽高大于图片宽高练习</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .box {
+        width: 600px;
+        height: 800px;
+        background: #ccc;
+        margin: auto;
+        padding: 40px;
+        position: relative;
+      }
+      .box>img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        /*
+        margin-left: -150px;
+        margin-top: -140px;
+        width: 300px;
+        height: 280px;
+        */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <img src="https://i.loli.net/2018/02/09/5a7d413a4dd5c.jpg" alt="a little cat">
+    </div>
+  </body>
+</html>
