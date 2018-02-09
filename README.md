@@ -38,6 +38,9 @@
  画册布局练习[demo](https://sam-pig.github.io/front-end/projects/task-css-11.html)
 </p>
 <p>
+ 关于外边距合并问题的研究练习[demo](https://sam-pig.github.io/front-end/projects/task-css-12.html)
+</p>
+<p>
  二列布局练习[demo](https://sam-pig.github.io/front-end/projects/task-css-13.html)
 </p>
 <p>
