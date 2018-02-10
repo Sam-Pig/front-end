@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style type="text/css">
+  	.dialogue {
+	  width: 300px;
+	  height: 200px;
+	  border: 1px solid #ccc;
+	  margin-top: 50px;
+	  position: relative;
+	  background: #fff;
+	}
+	.box1::before {
+	  content: "";
+	  border: 25px solid;
+	  border-color:transparent transparent #888;
+	  position: absolute;
+	  top: -50px;
+	  left: 10px;
+	}
+	.box2::before {
+	  content: "";
+	  border: 25px solid;
+	  border-color:transparent transparent red;
+	  position: absolute;
+	  top: -25px;
+	  right: -25px;
+	  transform: rotate(45deg);
+	}
+	.box3::before {
+	  content: "";
+	  width: 48px;
+	  height: 48px;
+	  border: 1px solid #ccc;
+	  border-color: #ccc rgba(0,0,0,0) rgba(0,0,0,0) #ccc;
+	  background: #fff;
+	  position: absolute;
+	  top: -25px;
+	  left: 25px;
+	  transform: rotate(45deg);
+	}
+  </style>
+</head>
+<body>
+  <div class="dialogue box1"></div>
+  <div class="dialogue box2"></div>
+  <div class="dialogue box3"></div>
+</body>
+</html>
