@@ -64,3 +64,6 @@
 <p>
  不定宽高的块在浏览器窗口水平垂直居中练习[demo](https://sam-pig.github.io/front-end/projects/task-css-20.html)
 </p>
+<p>
+ 用伪元素实现三角符号练习[demo](https://sam-pig.github.io/front-end/projects/task-css-21.html)
+</p>
