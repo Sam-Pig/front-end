@@ -67,3 +67,8 @@
 <p>
  用伪元素实现三角符号练习[demo](https://sam-pig.github.io/front-end/practice/task-css-21.html)
 </p>
+
+<h3>CSS综合demo</h3>
+<p>
+ 静态页面demo[demo](https://sam-pig.github.io/front-end/project/static-web-page/index.html)
+</p>
