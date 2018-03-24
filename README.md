@@ -72,3 +72,8 @@
 <p>
  静态页面demo[demo](https://sam-pig.github.io/front-end/project/static-web-page/index.html)
 </p>
+
+<h3>JS练习</h3>
+<p>
+ DOM操作练习[demo](https://sam-pig.github.io/front-end/practice/task-js-01.html)
+</p>
