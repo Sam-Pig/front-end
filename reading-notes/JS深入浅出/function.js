@@ -78,6 +78,18 @@
 	a = 2
 	b()//2
 
+	// 另外，函数有没有形参很重要！
+	function a(c){
+		console.log(c)
+	}
+	function b(){
+		console.log(c)
+	}
+	var c = 123
+	a()//undefined
+	b()//123
+
+
 
 /*--------------------------------------------------------------------------------------------*/
 // 3 call stack（调用堆栈）
@@ -314,5 +326,79 @@
 
 /*--------------------------------------------------------------------------------------------*/
 // 7 柯里化/高阶函数
+// 
+	// 7.1 柯里化，就是把一个多元函数的某一变量固定下来，进而得到了一个偏函数。--------------
+	function sum(x,y){
+		return x + y
+	}
+	function addOne(x){
+		return sum(x,1)
+	}
 
+	var Handlerbar = function(template, data){
+		return template.replace('{{name}}',data.name)
+	}
+	Handlerbar('<h1>Hi I am {{name}}</h1>',{name:'sam'})//"<h1>Hi I am sam</h1>"
+	// 声明变量来简化
+	var template = '<h1>Hi I am {{name}}</h1>'
+	Handlerbar(template,{name:'jack'})//"<h1>Hi I am jack</h1>"
+
+	//函数式编程不会频繁地去声明变量，可以考虑直接分两步走。先确定template，定下来一个函数，再确定data，得到结果。
+	function HandlerbarCurrying(template){
+		return function(data){
+			return template.replace('{{name}}',data.name)
+		}
+	}
+	var t = HandlerbarCurrying(template)//这一步其实什么也没做，只是返回了一个函数。
+	t({name:'rose'})//"<h1>Hi I am rose</h1>"
+	// 这样叫做:惰性求值。
+
+
+	// 7.2 高阶函数，是指接受（一个或多个）函数输入，或者输出函数，或者二者兼具的函数。---------
+
+		// 7.2.1 接受一个或多个函数作为输入：forEach sort map filter reduce
+			array.sort(function(a,b){a-b})
+			array.forEach(function(a){})
+			array.map(function(){})
+			array.filter(function(){})
+			array.reduce(function(){})
+
+		// 7.2.2 输出一个函数：lodash.curry
+
+		// 7.2.3 同时满足两个条件：Function.prototype.bind
+			fn.bind.call(fn,{},1,2,3)//bind()也是辟邪剑谱的写法，这是全经的写法。call()里的函数fn,代表bind要包装的父函数fnFather的里面内容，{}表示要fnFather.call({})。
+
+
+
+		// 高阶函数的一个重要的作用：可以将函数任意的组合！************************************
+
+		var array = [1,2,3,4,5,6,7,8,9,10]
+		// 试求array里所有偶数的和
+		// 常规解法：
+		var sum = 0
+		for(var i = 0; i < array.length; i++){
+			if(array[i] % 2 = 0){
+				sum += array[i]
+			}
+		}
+		console.log(sum)//30
+
+		// 其他解法
+
+		// 面向对象的写法：
+		array.filter(function(n){return n % 2 === 0}).reduce(function(p,n){return p + n}, 0)
+
+		// 函数式的写法：
+		
+		Array.prototype.reduce.call(Array.prototype.filter.call(array, function(n){return n % 2 === 0}), function(p,n){return p + n}, 0)// 为什么总是显示reduce是undefined呢？难道非要加上Array.prototype？
+		
+		// 高阶函数语法流畅，观感很优美，而且函数式编程可以方便实现组件之间的转换，因为每个组件基本上都可以用一个高阶函数来表达。
+		// 函数编程就是只使用纯函数与不可改变的值来撰写软体应用的一种方式。
+		// 所有的React组件必须运作得就像相对于它们props(属性)的纯函数。
+
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+// 8 回调函数(callback function)
 
