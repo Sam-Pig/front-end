@@ -6,7 +6,7 @@
 	// 4 this & arguments
 	// 5 call/apply
 	// 6 bind
-	// 7 retrun
+	// 7 return
 	// 8 柯里化/高阶函数
 	// 9 回调
 	// 10 构造函数
@@ -80,9 +80,9 @@
 
 
 /*--------------------------------------------------------------------------------------------*/
-// 3 call stack
+// 3 call stack（调用堆栈）
 // stack（栈）先进后出
-// call stack 记录你从哪里离开，设锚点，直至执行结束，取消锚点
+// call-stack 记录你从哪里离开，设锚点，直至执行结束，取消锚点
 
 	// 3.1 普通调用 1+1+1   -------------------------------------------------
 	function a(){
@@ -141,7 +141,7 @@
 	fab(5)
 
 	// 一句话总结，JS是单线程的，进入函数时有可能会忘掉从哪里进入的，所以要记录下进入的锚点；
-	// 而之后有可能存在多次进入（相同或者不同的）函数，所以记录下来的锚点有若干个，按顺序放在call stack里，call stack里的锚点数据符合先进后出的原则。
+	// 而之后有可能存在多次进入（相同或者不同的）函数，所以记录下来的锚点有若干个，按顺序放在call-stack里，call-stack里的锚点数据符合先进后出的原则。
 
 
 /*--------------------------------------------------------------------------------------------*/
@@ -154,24 +154,165 @@
 	    console.log(this)
 	    console.log(arguments)
   	}
-  	// call === 调用。call一个函数，要准备两样东西，一样是this，一样是一个叫做arguments的伪数组。
+  	// call === 调用。call一个函数，要准备两样东西，一样是叫做this的对象，一样是一个叫做arguments的伪数组。
 	f.call() //window,[] 
 	// 如果传参，this就是 window，arguments就是[]
-	f.call({name:'frank'}) // {name: 'frank'}, []
-	f.call({name:'frank'},1) // {name: 'frank'}, [1]
-	f.call({name:'frank'},[1,2]) // {name: 'frank'}, [1,2]
+	f.call({name:'sam'}) // {name: 'sam'}, []
+	f.call({name:'sam'},1) // {name: 'sam'}, [1]
+	f.call({name:'sam'},[1,2]) // {name: 'sam'}, [[1,2]]
 	f.call(null,1,2,3,4,"this",true,false,null,undefined)//window,[1,2,3,4,"this",true,false,null,undefined]
 
 	// f()是阉割版的f.call()，当你用前者时，参数直接被包装进了arguments里了，而this永远无法指定，只能靠浏览器去猜！
   	f()//window,[] 
   	f(1,2,3)//window,[1,2,3]
 
+
 	// 4.2 this是隐藏的第一个参数，且必须是对象 ------------------------------------
-	// 因为this就是函数与对象之间的羁绊。
-	
+
 	f.call(10,1)//Number {10},[1]
 	// 数字10被new Number(10)了。
+	//this必须是一个对象，如果call的第一个实参传的不是对象，那么，它将被转化成对象。
 
 
 
 	// 4.3 this为什么必须是对象？ ------------------------------------------------
+	// 因为this就是函数与对象之间的羁绊。
+	// 假设JS世界里面没有this:
+	var person = {
+		name: 'sam',
+		sayHi: function(person){
+			console.log('Hi, I am' + person.name)
+		},
+		sayBye: function(person){
+			console.log('Bye, I am' + person.name)
+		},
+		say: function(person, word){
+			console.log(word + ', I am' + person.name)
+		}
+	}
+	// 那么必须这么调用函数
+	person.sayHi(person)
+	person.sayBye(person)
+	person.say(person, 'How are you')
+
+	// 很low！能不能变成
+	person.sayHi()
+	person.sayBye()
+	person.say('How are you')
+
+	// JS之父出于人性化的考虑，决定设计一个方案，解决这个问题,这个方案就是this。
+	// this是一颗语法糖。
+	var person = {
+		name: 'sam',
+		sayHi: function(){
+			console.log('Hi, I am' + this.name)
+		},
+		sayBye: function(){
+			console.log('Bye, I am' + this.name)
+		},
+		say: function(word){
+			console.log(word + ', I am' + this.name)
+		}
+	}
+
+	// 用call的角度来理解
+	person.sayHi() === person.sayHi.call(person)
+	person.sayBye() === person.sayBye.call(person)
+	person.say('How are you') === person.say.call(person, 'How are you')
+
+	person.sayHi.call({name:jack})//'Hi, I am jack'
+	// 这说明函数sayHi是独立存在的，即便它被包装在对象person里面，但实质上与对象person并无一毛钱关系。
+	// 如果硬是要说他们之间有关系，那就是因为this的存在。
+	// this存在的意义，就是让函数有一个可以依托的对象（实际上是没有的）。
+	// 如果我们都用call写法，而不是阉割的太监写法，那么JS世界会更美好！
+
+
+	
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+// 5 call/apply
+//当不确定参数个数，或者参数过长，或参数为一个数组时，用apply
+
+	function sum(x,y){
+		return x+y
+	}
+	sum.call(null,1,2)//3
+	sum.call(1,2)//NaN
+	sum.call()//NaN
+
+	// 如果形参个数不确定呢？
+	function sum(){
+		var n = 0
+		for(var i = 0; i < arguments.length; i++){
+			n += arguments[i]
+		}
+		return n
+	}
+	sum(null,1,11,111,1111)//1234
+	sum(null,[1,11,111,1111])//"01,11,111,1111"，因为0 + [1,11,111,1111] == "01,11,111,1111"
+	var arr = [1,11,111,1111,11111,111111]
+	sum.apply(null,arr)//123456
+
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+// 6 bind
+// call和apply都是调用函数同时制定this和arguments，而bind是返回一个新的函数（并没有调用原来的函数）；
+// 
+	var view = {
+		element: $('#div1'),
+		bindEvent: function(){
+			this.element.onclick = function(){//这行的this，只能说按照人们的使用习俗（view.bindEvent())，大概率是指view对象,实际上只由call时确定。
+				this.onClick()//而这个this，按照文档，应该是触发这个事件的元素，也就是div1。当然，实际上，只是call这个匿名函数时传入的第一个参数。反正，大概率不是view对象！
+			}
+		}
+		onClick: function(){
+			...
+		}
+	}
+	// 有人为达目的，就强行固定this：
+	var view = {
+		element: $('#div1'),
+		bindEvent: function(){
+			var _this = this//强行固定
+			this.element.onclick = function(){
+				_this.onClick()
+			}
+		},
+		onClick: function(){
+			...
+		}
+	}
+	// stupid!
+	// 还不如这样
+	var view = {
+		element: $('#div1'),
+		bindEvent: function(){
+			this.element.onclick = function(){
+				view.onClick()
+			}
+		},
+		onClick: function(){
+			...
+		}
+	}
+	//JS之父看不下去了，就又发明了一颗语法糖：bind，来实现上述的功能。
+	var view = {
+		element: $(#'div1')
+		bindEvent: function(){
+			this.element.onclick = this.onClick.bind(this)//bind会造出一个函数，这个函数会包住前面的语句this.onClick，并且用this来call这个函数。
+		}
+		onClick: function(){
+			...
+		}
+	}
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+// 7 柯里化/高阶函数
+
+
