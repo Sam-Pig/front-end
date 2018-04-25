@@ -151,8 +151,8 @@
 
 	// 4.1 重要：this就是call的第一个参数，call的其他参数统称为arguments ------------
 	function f(){
-      console.log(this)
-      console.log(arguments)
+	    console.log(this)
+	    console.log(arguments)
   	}
   	// call === 调用。call一个函数，要准备两样东西，一样是this，一样是一个叫做arguments的伪数组。
 	f.call() //window,[] 
