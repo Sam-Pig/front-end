@@ -391,7 +391,7 @@
 		// 函数式的写法：
 		
 		Array.prototype.reduce.call(Array.prototype.filter.call(array, function(n){return n % 2 === 0}), function(p,n){return p + n}, 0)// 为什么总是显示reduce是undefined呢？难道非要加上Array.prototype？
-		
+
 		// 高阶函数语法流畅，观感很优美，而且函数式编程可以方便实现组件之间的转换，因为每个组件基本上都可以用一个高阶函数来表达。
 		// 函数编程就是只使用纯函数与不可改变的值来撰写软体应用的一种方式。
 		// 所有的React组件必须运作得就像相对于它们props(属性)的纯函数。
@@ -401,4 +401,95 @@
 
 /*--------------------------------------------------------------------------------------------*/
 // 8 回调函数(callback function)
+// 名词形式：被当做参数的函数就是回调函数；
+// 动词形式：调用这个回调参数（函数）；
+// 回调和异步没有任何关系。
 
+setTimeout(fn.bind(obj),1000,1,2)//异步回调
+
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+// 9 构造函数
+// 返回对象的函数就是构造函数。
+// 一般首字母大写。
+ 
+new Number(1)
+String(2)
+
+
+
+
+// 自己写一个构造函数
+function Empty(){
+	this.name = 'empty'
+	return this
+}
+var empty = Empty.call({})
+
+// 等同于
+function Empty(){}
+var empty = new Empty()
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+// 10 箭头函数
+
+function fn(x,y){
+	return x+y
+}
+// 等同于
+var fn = (x,y) => {return x+y}
+
+// 箭头函数最大的区别，是它没有this！
+setTimeout(function(){console.log(this)}.bind({name:'sam'}),1000)//{name: "sam"}
+setTimeout(function(){console.log(this);setTimeout(function(){console.log(this)},1000)}.bind({name:'sam'}),1000)//{name: "sam"},window
+setTimeout(function(){console.log(this);setTimeout(function(){console.log(this)}.bind(this),1000)}.bind({name:'sam'}),1000)//{name: "sam"},{name: "sam"}
+// 以上是旧的方式。
+// 当用了箭头函数以后
+setTimeout(function(){
+	console.log(this)
+	setTimeout(() => console.log(this),1000)
+}.bind({name:'sam'}),1000)//{name: "sam"},{name: "sam"}
+// 对于箭头函数来说，this就是一个词法变量，它自身是不含有隐含参数this的，它只会按照作用域链法则去分析这个this。
+// 但是还是有arguments的。
+
+// 当然，call语法也失效了。
+var fn = () => {console.log(this)}
+fn.call({name:"sam"})//window
+fn.call(null,1,2,3)//window
+
+
+
+
+// 关于return:   ********************************************************
+// 每个函数都有return，若未明文指定return什么，则函数会自行return undefined。
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------------*/
+// 思考题：
+// 请写出一个柯里化其他函数的函数 curry，这个函数能够将接受多个参数的函数，变成多个接受一个参数的函数，具体见示例（这是 lodash.curry 的文档示例）：
+
+function curry(???){
+    ???
+    return ???
+}
+var abc = function(a, b, c) {
+  return [a, b, c];
+};
+
+var curried = curry(abc);
+
+curried(1)(2)(3);
+// => [1, 2, 3]
+
+curried(1, 2)(3);
+// => [1, 2, 3]
+
+curried(1, 2, 3);
+// => [1, 2, 3]
