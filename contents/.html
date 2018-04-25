@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ajax</title>
+</head>
+<body>
+<script type="text/javascript">
+	// var xhr = new XMLHttpRequest();
+	// xhr.open("GET","https://easy-mock.com/mock/5addc1920ab25a3530febf0d/music/getType",true);
+	// xhr.addEventListener("readystatechange",function(){
+	// 	console.log("readyState:",xhr.readyState);
+	// });
+	// xhr.addEventListener("load",function(){
+	// 	if((xhr.status >=200 && xhr.status < 300) || xhr.status == 304){
+	// 		console.log(xhr.responseText);
+	// 	}else{
+	// 		console.log("server error!");
+	// 	}
+	// });
+	// xhr.onerror = function() {
+	// 	console.log("network anomaly!");
+	// }
+	// xhr.send();
+
+	// var json_example = {
+	// 	"name":"zhucheng",
+	// 	"age":"24",
+	// 	"sex":"man",
+	// 	"hobbies":["reading","running","calligraphy","smoke"]
+	// };
+	// //console.log(JSON.parse(json_example));
+	// //console.log(JSON.parse(xhr.responseText));
+	// function a(a){
+	// 	console.log(a);
+	// }
+	// a(JSON.parse(xhr.responseText));
+
+	// var xhr_get = new XMLHttpRequest();
+	// xhr_get.open("GET","/login?username=sam&password=123",true);
+	// xhr_get.send();
+	// xhr_post.open("POST","/login",true);
+	// xhr_post.send("username=sam&password=123");
+
+
+
+
+	// makeURL({
+	// 	username: "hunger",
+	// 	age: 3
+	// })
+	// function makeURL(obj){
+	// 	var arr = [];
+	// 	for(var key in obj){
+	// 		arr.push(key + "=" + obj[key])
+	// 	}
+	// 	return arr.join("&");
+	// }
+
+
+
+	// var xhr = new XMLHttpRequest();
+	// xhr.open(type,url,true);
+	// xhr.send();
+	// xhr.onload = function(){
+	// 	if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+
+	// 	}
+	// }
+	
+	// function ajax(opts) {
+	// 	var url = opts.url,
+	// 		type = opts.type || "GET",
+	// 		dataType = opts.dataType || "json",
+	// 		onsuccess = opts.onsuccess || function(){},
+	// 		onerror = opts.onerror || function(){},
+	// 		data = opts.data || {},
+	// 		dataStr = [];
+	// 	for(var key in data){
+	// 		dataStr.push(key += "=" + data[key]);
+	// 	}
+	// 	dataStr = dataStr.join("&");
+	// 	if(type === "GET"){
+	// 		url += "?" + dataStr;
+	// 	}
+	// 	var xhr = new XMLHttpRequest();
+	// 	xhr.open(type,url,true);
+	// 	xhr.onload = function() {
+	// 		if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+	// 			if(dataType === "json"){
+	// 				onsuccess(JSON.parse(xhr.responseText));
+	// 			}else{
+	// 				onsuccess(xhr.responseText);
+	// 			}
+	// 		}else{
+	// 			onerror();
+	// 		}
+	// 	};
+	// 	xhr.onerror = onerror;
+	// 	if(type === "POST"){
+	// 		xhr.send(dataStr);
+	// 	}else{
+	// 		xhr.send();
+	// 	}
+	// }
+	// ajax({
+	// 	url:"https://easy-mock.com/mock/5addc1920ab25a3530febf0d/music/getType",
+	// 	type:"GET",
+	// 	dataType:"json",
+	// 	data:{
+	// 		"name":"zhucheng",
+	// 		"age":"24",
+	// 		"sex":"man",
+	// 		"hobbies":["reading","running","calligraphy","smoke"]
+	// 	}
+	// 	onsuccess:function(ret) {
+	// 		console.log(ret)
+	// 	},
+	// 	onerror:function(){
+	// 		console.log("服务器异常！")
+	// 	}
+	// });
+
+
+
+
+	//封装一个 ajax
+	function ajax(opts){
+	    var url = opts.url
+	    var type = opts.type || 'GET'
+	    var dataType = opts.dataType || 'json'
+	    var onsuccess = opts.onsuccess || function(){}
+	    var onerror = opts.onerror || function(){}
+	    var data = opts.data || {}
+	    var dataStr = [] 
+	    for(var key in data){
+	        dataStr.push(key + '=' + data[key])
+	    }
+	    dataStr = dataStr.join('&')
+
+	    if(type === 'GET'){
+	        url += '?' + dataStr//神奇
+	    }
+	    var xhr = new XMLHttpRequest()
+	    xhr.open(type, url, true)
+	    xhr.onload = function(){
+	        if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+	            //成功了
+	            if(dataType === 'json'){
+	                onsuccess(JSON.stringify(JSON.parse(xhr.responseText)))
+	            }else{
+	                onsuccess( xhr.responseText)
+	            }
+	        } else {
+	            onerror()
+	        }
+	    }
+	    xhr.onerror = onerror
+	    if(type === 'POST'){
+	        xhr.send(dataStr)
+	    }else{
+	        xhr.send()
+	    }
+	}
+
+	ajax({
+	    url: 'https://easy-mock.com/mock/5addc1920ab25a3530febf0d/music/getType',
+	    data: {
+	        "username": "sam",
+	        "password": "0011",
+	        "age": "24"
+	    },
+	    onsuccess: function(ret){
+	        console.log(ret)
+	    },
+	    onerror: function(){
+	        console.log('服务器异常')
+	    }
+	})
+</script>
+</body>
+</html>
