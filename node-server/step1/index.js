@@ -10,5 +10,24 @@ server.listen(8080)
 
 
 function staticRoot(staticPath, req, res) {
+	var pathObj = url.parse(req.url ,true)
+
+	if(pathObj.pathname === '/'){
+		pathObj.pathname += 'index.html'
+	}
+
+	var filePath = path.join(staticPath, pathObj.pathname)
+	
+
+
+
+
+
+
+
+
+
+
+
 
 }
