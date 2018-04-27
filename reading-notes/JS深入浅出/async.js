@@ -6,9 +6,10 @@
 	// 3 面试题中的异步
 	// 4 AJAX中的异步
 	// 5 异步的形式
-	// 6 如何处理异常？
-	// 7 自己返回Promise
-	// 8 async/await
+	// 6 回调的形式
+	// 7 如何处理异常？
+	// 8 自己返回Promise
+	// 9 async/await
 
 
 
@@ -135,9 +136,10 @@
 		}
 	}, 1000)
 	// 但是这样仍然很蠢！
-	
+
 
 	// 5.2 回调 -----------------------------------------------------------------------------------
+
 	function buyFruit(fn){
 		setTimeout(() => {
 			fn.call(null,'买到了水果')
@@ -147,3 +149,59 @@
 		console.log(arguments[0])
 	})
 	// 在前端人员知道回调之后，基本上就不会去用轮询了，因为后者很傻逼。
+
+	function getYears(fn){
+		setTimeout(function(){
+			fn.call(undefined,1994,09)
+		}, Math.random() * 10 * 1000)
+	}
+	getYears(function(){
+		console.log('出生年月：' + arguments[0] + ',' + arguments[1])
+	})//'出生年月：1994,9'
+
+
+
+
+/*------------------------------------------------------------------------------------------------------------*/
+// 6 回调的形式
+
+	// 6.1 node.js的error-first形式 -----------------------------------------------------------------
+	function buyFruit(fn){
+		setTimeout(function(){
+			if(Math.random() > 0.5){
+				fn.call(undefined, true)
+			}else{
+				fn.call(undefined, new Error())
+			}
+		}, Math.random() * 10 * 1000)
+	}
+	buyFruit(function(e){
+		if(e instanceof Error){
+			console.log('fail')
+		}else{
+			console.log('success')
+		}
+	})
+	// 6.2 jQuery的success/error形式 ---------------------------------------------------------------
+
+	
+
+	// 6.3 jQuery的done/fail/always形式 ------------------------------------------------------------
+
+
+
+	// 6.4 Prosmise的then形式 ----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
