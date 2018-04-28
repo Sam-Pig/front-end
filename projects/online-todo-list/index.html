@@ -3,11 +3,89 @@
 <head>
 	<meta charset="utf-8">
 	<title>online-MyTodo</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.min.css">
 	<link rel="stylesheet" type="text/css" href="css/base.css">
 </head>
 <body>
 	<!-- 最外层总容器container -->
-	<div class="container"></div>
+	<div class="container">
+		<h1>My Todo</h1>
+		<!-- form表单 -->
+		<form class="add-task">
+			<input type="text" class="content">
+			<button class="add-task-submit">submit</button>
+		</form>
+		<!-- 任务列表容器task-list -->
+		<div class="task-list">
+
+			<div class="task-item">
+				<!-- 复选框 -->
+				<span>
+					<input type="checkbox" name="">
+				</span>
+				<!-- item的content -->
+				<span class="item-content">
+					今晚不睡觉
+				</span>
+				<!-- item右侧的action -->
+				<span class="fr">
+					<span class="action detail">
+						详情
+					</span>
+					<span class="action delete">
+						删除
+					</span>				
+				</span>
+			</div>
+
+			<div class="task-item">
+				<!-- 复选框 -->
+				<span>
+					<input type="checkbox" name="">
+				</span>
+				<!-- item的content -->
+				<span class="item-content">
+					今晚去看星星
+				</span>
+				<!-- item右侧的action -->
+				<span class="fr">
+					<span class="action detail">
+						详情
+					</span>
+					<span class="action delete">
+						删除
+					</span>				
+				</span>
+			</div>
+
+			<div class="task-item">
+				<!-- 复选框 -->
+				<span>
+					<input type="checkbox" name="">
+				</span>
+				<!-- item的content -->
+				<span class="item-content">
+					今晚去修仙
+				</span>
+				<!-- item右侧的action -->
+				<span class="fr">
+					<span class="action detail">
+						详情
+					</span>
+					<span class="action delete">
+						删除
+					</span>				
+				</span>
+			</div>
+		</div>
+	</div>
+	<!-- jquery -->
+	<script type="text/javascript" src="js/jquery.js" charset="utf-8"></script>
+	<!-- datatimepicker插件JS部分 -->
+	<script type="text/javascript" src="js/jquery.datetimepicker.full.js" charset="utf-8"></script>
+	<!-- store.js 相当于一个前端的数据库 -->
+	<script type="text/javascript" src="js/store.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/base.js" charset="utf-8"></script>
 </body>
 </html>
