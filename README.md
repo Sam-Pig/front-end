@@ -1,7 +1,7 @@
 <h3>综合项目demo</h3>
 <p>在线todo-list [demo](https://sam-pig.github.io/front-end/projects/online-todo-list/index.html)<p>
 
-<h3>JS练demo</h3>
+<h3>JS练习demo</h3>
 <p>
  DOM操作练习[demo](https://sam-pig.github.io/front-end/practice/task-js-01.html)
 </p>
