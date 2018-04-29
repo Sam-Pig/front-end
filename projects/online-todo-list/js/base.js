@@ -7,33 +7,23 @@ var myTodoModule = (function(){
 	定义变量
 	*/
 	var task_list = [];
-	var $content, $task-list;
+	var $content, $task_list, $addTaskSubmit;
 	/*
 	初始化jQuery对象
 	*/
 	var initJqVar = function(){
 		$content = $('.content');//初始化jq对象只执行了一次
-		$task-list = $('.task-list');
-		$add-task-submit = $('.add-task-submit');
+		$task_list = $('.task-list');
+		$addTaskSubmit = $('.add-task-submit');
 	}
 	/*
-	添加task-item的方法---------要和按钮的点击事件绑定
+	页面初始化时，从store里取出task_list并渲染的方法
 	*/
-	var addTask = function(){
-		var new_task = {};
-		new_task.content = $content.val();//讲input框的值赋值给新的对象的content
-		task_list.push(new_task);
-		store.set('task_list',task_list);//保存task_list
-		render_task_list();
-	}	
-	/*
-	向页面渲染task_list的方法
-	*/
-	var render_task_list(){
-		$task-list.html('');//清空task-list div
-		task_list = store.get('task_list');//取出task_list，并赋值给task_list
+	var initRenderIndex = function(){
+		$task_list.html('');
+		task_list = store.get('task_list');
 		var taskListHtmlStr = '';
-		for(var i = 0; i <  task_list.length; i++){
+		for (var i = task_list.length - 1; i >= 0; i--) {
 			var oneItem = '<div class="task-item" data-index="'+i+'>'+
 				'<span>'+
 					'<input type="checkbox" name="">'+
@@ -52,18 +42,55 @@ var myTodoModule = (function(){
 					'</span>'+		
 				'</span>'+
 			'</div>';
-			taskListHtmlStr += oneItem;
+			taskListHtmlStr += oneItem;	
 		}
-		$task-list.appendTo($task-list);//给大的task_list填充item
+		$(taskListHtmlStr).appendTo($task-list);
 	}
 
-
+	/*
+	添加task-item的方法---------要和按钮的点击事件绑定
+	*/
+	var addTask = function(){
+		var new_task = {};
+		new_task.content = $content.val();//讲input框的值赋值给新的对象的content
+		task_list.push(new_task);
+		store.set('task_list',task_list);//保存task_list
+		renderOneItem();
+	}	
+	/*
+	向html列表中新添加一条记录的方法
+	*/
+	var renderOneItem = function(new_task){
+		var oneItem = '<div class="task-item" data-index="'+i+'>'+
+			'<span>'+
+				'<input type="checkbox" name="">'+
+			'</span>'+
+			
+			'<span class="item-content">'+new_task.content+
+				
+			'</span>'+
+			
+			'<span class="fr">'+
+				'<span class="action detail">'+
+					'详情'+
+				'</span>'+
+				'<span class="action delete">'+
+					'删除'+
+				'</span>'+		
+			'</span>'+
+		'</div>';
+		$(oneItem).prependTo($task-list);//在task_list顶端填充新的item
+	}
 
 	/*
 	页面初始化就要执行的方法放在initmodule里
 	*/
 	var initModule = function(){
 		initJqVar();
+		initRenderIndex();
+		$addTaskSubmit.click(function(){
+			addTask();
+		});
 	}
 	return {
 		initModule:initModule

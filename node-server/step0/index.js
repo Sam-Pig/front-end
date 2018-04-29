@@ -8,4 +8,4 @@ var server = http.createServer(function(req,res){//内部会创建一个服务�
 	res.write("</body></html>");
 	res.end();
 });
-server.listen(8080);//启动服务器，使这个服务器监听9000这个端口
+server.listen(9000);//启动服务器，使这个服务器监听9000这个端口
