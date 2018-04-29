@@ -16,7 +16,7 @@ var myTodoModule = (function(){
 	var task_list = [];//用来存储task_list里的信息
 	var $task_list, 
 		$content,
-		$addNewTaskItem;
+		$addTaskSubmit;
 	function isArray(obj) { 
   		return Object.prototype.toString.call(obj) === '[object Array]'; 
 	}
@@ -25,16 +25,17 @@ var myTodoModule = (function(){
 	var initJqVar = function(){
 		$task_list = $('.task-list');
 		$content = $('.content');
-		$addNewTaskItem = $('.add-task-submit');
+		$addTaskSubmit = $('.add-task-submit');
 	}
 
 	// 页面初始化时清除task-list内容，并从store里get内容render到div里的方法
 	var initTaskListRender = function(){
 		$task_list.html('');//清除task-list div部分的内容
-		if(isArray(store.get('task_list'))){//先要确保store里有task_list数组
+		//先要判断store里有task_list数组，没有要初始化store，有则直接get
+		if(isArray(store.get('task_list'))){
 			task_list = store.get('task_list');//从数据库store里get task_list的数据，存储在数组task_list里
 			var  taskListHtmlStr = '';
-			for (var i = task_list.length - 1; i >= 0; i--){
+			for(var i = task_list.length - 1; i >= 0; i--){
 				var oneItem = '<div class="task-item" data-index="'+i+'">'+
 					'<span>'+
 						'<input type="checkbox" name="">'+
@@ -89,13 +90,18 @@ var myTodoModule = (function(){
 		initTaskListRender();
 	}
 
+	//点击button绑定事件函数
+	var addTaskListener = function(){
+		$addTaskSubmit.click(function(){
+			addNewTaskItem();
+		});
+	}
+
 	// 页面初始化就要执行的区域
 	var initModule = function(){
 		initJqVar();
 		initTaskListRender();
-		$addNewTaskItem.click(function(){
-			addNewTaskItem();
-		});
+		addTaskListener();
 	}
 
 	return {initModule:initModule};
