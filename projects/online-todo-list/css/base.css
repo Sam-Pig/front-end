@@ -63,7 +63,9 @@ h1 {
 .item-content {
 	margin-left: 15px;
 }
-
+.action {
+	padding-right: 5px;
+}
 .detail {
 	cursor: pointer;
 }
