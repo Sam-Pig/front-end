@@ -29,10 +29,11 @@ var myTodoModule = (function(){
 	// 页面初始化时清除task-list内容，并从store里get内容render到div里的方法
 	var initTaskListRender = function(){
 		$task_list.html('');//清除task-list div部分的内容
+		// store.set('task_list',task_list);//先要确保store里有task_list数组
 		task_list = store.get('task_list');//从数据库store里get task_list的数据，存储在数组task_list里
 		var  taskListHtmlStr = '';
-		for(var i = task_list.length - 1; i >= 0; i --){
-			var oneItem = '<div class="task-item" data-index="'+i+'>'+
+		for (var i = task_list.length - 1; i >= 0; i--){
+			var oneItem = '<div class="task-item" data-index="'+i+'">'+
 				'<span>'+
 					'<input type="checkbox" name="">'+
 				'</span>'+
