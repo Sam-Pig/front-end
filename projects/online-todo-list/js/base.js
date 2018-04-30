@@ -14,6 +14,7 @@ JS要实现的功能，有以下几点:
 var myTodoModule = (function(){
 	// 定义模块作用域变量的区域
 	var task_list = [];//用来存储task_list里的信息
+
 	var $task_list, 
 		$content,
 		$addTaskSubmit,
@@ -24,11 +25,14 @@ var myTodoModule = (function(){
 		$datetime,
 		$detail_submit,
 		$delete;
+
 	var detailIndex,//记录点击详情和删除时候的索引
 		deleteIndex;
+
 	function isArray(obj) { 
   		return Object.prototype.toString.call(obj) === '[object Array]'; 
 	}
+
 
 	// 初始化jQuery的区域
 	var initJqVar = function(){
@@ -154,6 +158,7 @@ var myTodoModule = (function(){
 				task_list.splice(deleteIndex,1);//第一个参数是开始索引，第二个是个数，此步骤是删除数据
 				$(this).parent().parent().remove();//.remove()此步骤是移除元素task-item的所有文本和子节点；该方法不会把匹配的元素从 jQuery 对象中删除，因而可以在将来再使用这些匹配的元素。
 				store.set('task_list',task_list);
+				$task_detail.hide();
 			}
 		})
 	}
