@@ -12,12 +12,17 @@ JS要实现的功能，有以下几点:
 
 
 var myTodoModule = (function(){
-	// 定义变量的区域
+	// 定义模块作用域变量的区域
 	var task_list = [];//用来存储task_list里的信息
 	var $task_list, 
 		$content,
 		$addTaskSubmit,
-		$detail;
+		$detail,
+		$task_detail,
+		$task_detail_content,
+		$descript,
+		$datetime,
+		$detail_submit;
 	var detailIndex,//记录点击详情和删除时候的索引
 		deleteIndex;
 	function isArray(obj) { 
@@ -30,6 +35,11 @@ var myTodoModule = (function(){
 		$content = $('.content');
 		$addTaskSubmit = $('.add-task-submit');
 		$detail = $('.detail');
+		$task_detail = $('.task-detail');
+		$task_detail_content = $('.task-detail-content');
+		$descript = $('.descript');
+		$datetime = $('.datetime');
+		$detail_submit = $('.detail-submit');
 	}
 
 	// 页面初始化时清除task-list内容，并从store里get内容render到div里的方法
@@ -83,6 +93,8 @@ var myTodoModule = (function(){
 			}	
 		}
 		$(taskListHtmlStr).appendTo('.task-list');//向task-list节点后面添加task_list数组里的内容
+		$content.val('');
+		// detailListener();
 	}
 
 	// 添加new task-item到数据库store并调用数据库刷新页面的办法
@@ -101,18 +113,39 @@ var myTodoModule = (function(){
 		});
 	}
 
-	var detailListener = function(){
+	//点击detail详情编辑框弹出绑定监听函数
+	var detailShowListener = function(){
 		$('.detail').click(function(){
-			console.log($(this).parent().parent().index());
-		})
+			detailIndex = task_list.length - 1 - $(this).parent().parent().index();
+			$task_detail.show();
+			$task_detail_content.val(task_list[detailIndex].content);
+			$descript.val(task_list[detailIndex].descript);
+			$datetime.val(task_list[detailIndex].datetime);
+		});
+	}
+
+	// 点击detail-submit保存编辑框绑定监听函数
+	var datailSaveLinstener = function(){
+		$detail_submit.click(function(){
+			var dataTask = {};
+			dataTask.content = $task_detail_content.val();
+			dataTask.descript = $descript.val();
+			dataTask.datetime = $datetime.val();
+			// 修改更新操作--要把修改后的对象和原来的对象合并
+			task_list[detailIndex] = $.extend(task_list[detailIndex],dataTask);
+
+
+		});
 	}
 
 	// 页面初始化就要执行的区域
 	var initModule = function(){
 		initJqVar();
+		$datetime.datetimepicker();
 		initTaskListRender();
 		addTaskListener();
 		detailListener();
+
 	}
 
 	return {initModule:initModule};
