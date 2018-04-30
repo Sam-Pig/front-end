@@ -16,7 +16,10 @@ var myTodoModule = (function(){
 	var task_list = [];//用来存储task_list里的信息
 	var $task_list, 
 		$content,
-		$addTaskSubmit;
+		$addTaskSubmit,
+		$detail;
+	var detailIndex,//记录点击详情和删除时候的索引
+		deleteIndex;
 	function isArray(obj) { 
   		return Object.prototype.toString.call(obj) === '[object Array]'; 
 	}
@@ -26,6 +29,7 @@ var myTodoModule = (function(){
 		$task_list = $('.task-list');
 		$content = $('.content');
 		$addTaskSubmit = $('.add-task-submit');
+		$detail = $('.detail');
 	}
 
 	// 页面初始化时清除task-list内容，并从store里get内容render到div里的方法
@@ -97,11 +101,18 @@ var myTodoModule = (function(){
 		});
 	}
 
+	var detailListener = function(){
+		$('.detail').click(function(){
+			console.log($(this).parent().parent().index());
+		})
+	}
+
 	// 页面初始化就要执行的区域
 	var initModule = function(){
 		initJqVar();
 		initTaskListRender();
 		addTaskListener();
+		detailListener();
 	}
 
 	return {initModule:initModule};
