@@ -22,7 +22,8 @@ var myTodoModule = (function(){
 		$task_detail_content,
 		$descript,
 		$datetime,
-		$detail_submit;
+		$detail_submit,
+		$delete;
 	var detailIndex,//记录点击详情和删除时候的索引
 		deleteIndex;
 	function isArray(obj) { 
@@ -40,12 +41,13 @@ var myTodoModule = (function(){
 		$descript = $('.descript');
 		$datetime = $('.datetime');
 		$detail_submit = $('.detail-submit');
+		$delete = $('.delete');
 	}
 
 	// 页面初始化时清除task-list内容，并从store里get内容render到div里的方法
 	var initTaskListRender = function(){
 		$task_list.html('');//清除task-list div部分的内容
-		//先要判断store里有task_list数组，没有要初始化store，有则直接get
+		//先要判断store里是否有task_list数组，有的话直接get，没有则要初始化store，把task_list数组set进去
 		if(isArray(store.get('task_list'))){
 			task_list = store.get('task_list');//从数据库store里get task_list的数据，存储在数组task_list里
 			var  taskListHtmlStr = '';
@@ -94,7 +96,8 @@ var myTodoModule = (function(){
 		}
 		$(taskListHtmlStr).appendTo('.task-list');//向task-list节点后面添加task_list数组里的内容
 		$content.val('');
-		// detailListener();
+		detailShowListener();//再次注册详情点击监听函数
+		deleteListener();
 	}
 
 	// 添加new task-item到数据库store并调用数据库刷新页面的办法
@@ -115,7 +118,7 @@ var myTodoModule = (function(){
 
 	//点击detail详情编辑框弹出绑定监听函数
 	var detailShowListener = function(){
-		$('.detail').click(function(){
+		$('.detail').click(function(){//注意不能用$delete!
 			detailIndex = task_list.length - 1 - $(this).parent().parent().index();
 			$task_detail.show();
 			$task_detail_content.val(task_list[detailIndex].content);
@@ -125,7 +128,7 @@ var myTodoModule = (function(){
 	}
 
 	// 点击detail-submit保存编辑框绑定监听函数
-	var datailSaveLinstener = function(){
+	var detailSaveLinstener = function(){
 		$detail_submit.click(function(){
 			var dataTask = {};
 			dataTask.content = $task_detail_content.val();
@@ -133,19 +136,38 @@ var myTodoModule = (function(){
 			dataTask.datetime = $datetime.val();
 			// 修改更新操作--要把修改后的对象和原来的对象合并
 			task_list[detailIndex] = $.extend(task_list[detailIndex],dataTask);
-
-
+			store.set('task_list',task_list);
+			$task_detail_content.val('');
+			$descript.val('');
+			$datetime.val('');
+			$task_detail.hide();
+			initTaskListRender();//刷新页面
 		});
 	}
+
+	//点击delete删除操作绑定监听函数
+	var deleteListener = function(){
+		$('.delete').click(function(){
+			deleteIndex = task_list.length - 1 - $(this).parent().parent().index();
+			var r = confirm('确认要删除吗？');
+			if(r){
+				task_list.splice(deleteIndex,1);//第一个参数是开始索引，第二个是个数，此步骤是删除数据
+				$(this).parent().parent().remove();//.remove()此步骤是移除元素task-item的所有文本和子节点；该方法不会把匹配的元素从 jQuery 对象中删除，因而可以在将来再使用这些匹配的元素。
+				store.set('task_list',task_list);
+			}
+		})
+	}
+
 
 	// 页面初始化就要执行的区域
 	var initModule = function(){
 		initJqVar();
-		$datetime.datetimepicker();
+		$datetime.datetimepicker();//在datetime上调用datetimepicker库
 		initTaskListRender();
 		addTaskListener();
-		detailListener();
-
+		detailShowListener();
+		detailSaveLinstener();
+		deleteListener();
 	}
 
 	return {initModule:initModule};
