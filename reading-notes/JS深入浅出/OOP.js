@@ -111,6 +111,185 @@
 	}
 	obj.__proto__ = objGong
 	obj.call(obj)//"hello world"
+	// 所以，所谓函数，其实就是一段可以eval的字符串。
+	// 所谓call（执行）函数，其实就是把这段字符串给eval一下。
+	// 所以，为什么要推荐用call方法而不是用阉割版的括号，现在可以明白了。
+
+
+	// 3.2 函数是如何一步步堕落的？
+
+	// 此时，函数很单纯，他是一等公民。
+	function sayName(x){
+		console.log('I am ' + x)
+	}
+	sayName('Sam')//I am Sam
+
+
+	// 现在，对象非要把函数拉进直接的体系里，但是，他们之间仍然是没有什么苟合。
+	// 对象里只是保存了函数sayName的地址罢了。
+	var obj = {
+		name: 'Sam',
+		sayName: function(x){
+			console.log('I am ' + x)
+		}
+	}
+	obj.sayName(obj.name)//I am Sam
+
+
+	// 函数做出了让步，二者似乎有些关联了（但其实仍然没有实质关联）。
+	// 这一切，都是因为JS的函数，原本很纯，纯到只接受括号里的参数，只返回一个值，而不接受其他任何东西。
+	// 函数没有办法获取.之前的东西，因为，它就是那么单纯，那么美好。
+	var obj = {
+		name: 'Sam',
+		sayName: function(x){
+			console.log('I am ' + x.name)
+		}
+	}
+	obj.sayName(obj)//I am Sam
+	obj.sayName()//Uncaught TypeError: Cannot read property 'name' of undefined
+
+
+
+	//受迫讨喜于Java程序员，JS之父发明this，函数不再单纯了。
+	var obj = {
+		name: 'Sam',
+		sayName: function(){
+			console.log('I am ' + this.name)
+		}
+	}
+	// 一般写法：
+	// 隐式传入obj，玩家视角，讨好Java程序员，前端小白
+	obj.sayName()//I am Sam
+
+	// 智障写法：
+	obj.sayName(obj)//I am Sam
+
+	// 推荐写法--使用没有魔法的纯函数：
+	// 显示传入obj，上帝视角，JS之父的真爱，中级前端
+	obj.sayName.call(obj)//I am Sam
+
+
+
+
+	// 3.3 爸爸去哪了？----函数的迷思
+
+	var father = {
+		name: 'Mayun',
+		child: {
+			name: 'Sicong',
+			sayName: function(){
+				console.log(this.name)
+			}
+		}
+	}
+	father.child.sayName()//Sicong
+	father.child.sayName.call()//空
+	father.child.sayName.call(undefined)//空
+	// 如果什么都不传，this在浏览器环境下是window。
+
+
+	// 当然，在严格模式下，则会报错。
+	var father = {
+		name: 'Mayun',
+		child: {
+			name: 'Sicong',
+			sayName: function(){
+				'use strict'
+				console.log(this.name)
+			}
+		}
+	}
+	father.child.sayName()//Sicong
+	father.child.sayName.call()// Uncaught TypeError: Cannot read property 'name' of undefined
+
+	// 寻找真爸爸
+	father.child.sayName.call({name:'Wangjianlin'})//Wangjianlin
+
+
+
+
+
+/*--------------------------------------重要结论----------------------------------------------------------*/
+	// 经典三段论：
+		// 1、参数的值只有在传参的时候才能确定；
+		// 2、this是函数的第一个参数；
+		// 结论：this的值只有在传参的时候才能确定！
+
+
+	// 面试题
+	// 指出以下情况下this的值
+
+	function a(){
+		console.log(this)
+	}
+	// 不确定
+
+
+	function a(){
+		console.log(this)
+	}
+	a()//window|global
+
+
+
+	function a(){
+		'use strict'//别乱搞
+		console.log(this)
+	}
+	a()//undefined
+
+
+
+	function a(){
+		'use strict'
+		console.log(this)
+	}
+	var obj = {
+		sayThis: a
+	}
+	obj.sayThis()//这个对象本身
+	obj.sayThis.call()//undefined（因为在严格模式下）
+	obj.sayThis,call(1)//1
+
+
+
+
+/*--------------------------------------以下都是错的-----------------------------------------------*/
+	button.onclick =function(){
+		console.log(this)
+	}
+	//按照MDN文档，this值一定是触发事件的元素，否则就是bug。
+
+
+	$('#button').on('click',function(){
+		console.log(this)
+	})
+	// 按照jQuery文档，对于直接事件而言，this代表绑定的元素。
+	// 只有两种方式可以确定this
+	// 一个是看官方文档，一个是控制台
+		// 附：前端开发中文文档导航 cndevdocs.com
+
+
+	$('ul').on('click','li',function(){
+		console.log(this)
+	}// 按照jQuery文档，对于事件代理而言，this代表与selector相匹配的元素（即li）。
+
+
+
+	new Vue({
+		data: function(){
+			console.log(this)
+		}
+	})
+	// Vue文档：this指new出来的对象
+
+/*--------------------------------------以下都是错的-----------------------------------------------*/
+
+	// this的最大特性，就是不确定性。
+
+	// JS痛改前非、拨乱反正，利用箭头函数彻底抹杀了this，这说明JS走出了自己的一条路，已不是当年依附在Java羽翼下的小脚本语言了。
+
+
 
 
 
