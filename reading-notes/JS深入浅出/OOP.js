@@ -398,6 +398,94 @@
 	}
 
 
+	// 按照JS的建议，需要把createOneSoldier.common写为createOneSoldier.prototype
+	// 当然，这只是一个代号罢了，叫什么都行。
+	// 对象在内存里面是没有名字的！stack--heap，炮友关系而已。
+
+	function createOneSoldier(){
+		var soldier = {
+				ID: i,
+				生命值: 45
+		}
+		soldier.__proto__ = createOneSoldier.property
+		return soldier
+	}
+	createOneSoldier.property = {
+		兵种: '美国大兵',
+		攻击力: '15',
+		行走: function(){},
+		奔跑: function(){},
+		死亡: function(){},
+		攻击: function(){},
+		防御: function(){}
+	}
+
+	// 这样的代码，可以说是典范了。
+	// 既然是典范， JS之父就决定推广给所有JS使用者。
+	// 推广方式就是搞出来一个新的关键词：new----JS之父的关怀。
+
+	// 官方推荐写法：
+	// 注释代码都是JS隐式执行的。
+
+	// 初始化自有属性：
+	function createOneSoldier(){
+		// this = ｛｝
+		// this.__proto__ = createOneSoldier.prototype
+		this.ID = i
+		this.生命值 = 45
+		this.name = name || '无名战士'
+		// return this
+	}
+	// createOneSoldier.property = {constructor: createOneSoldier}
+
+		// createOneSoldier.property不能自己去写，否则会覆盖了地址，除非在里面加上constructor: createOneSoldier一句
+
+	// 初始化共有属性：
+	createOneSoldier.prototype.兵种 = '美国大兵'
+	createOneSoldier.prototype.攻击力 = '15'
+	createOneSoldier.prototype.行走 = function(){}
+	createOneSoldier.prototype.奔跑 = function(){}
+	createOneSoldier.prototype.死亡 = function(){}
+	createOneSoldier.prototype.攻击 = function(){}
+	createOneSoldier.prototype.防御 = function(){}
+
+	// 调用该构造函数
+	var soldiers = []
+	for(var i = 0; i < 100; i++){
+		soldiers.push(new createOneSoldier())
+	}
+
+
+	// 到这里，基本上没有什么可以优化的了，但有几点约定俗成的规则要落实：
+	// 1、构造函数的首字母要大写；
+	// 2、构造函数可以省掉create；
+	// 3、如果构造函数没有参数，可以省略括号。
+
+	function OneSoldier(ID,health,name){
+		this.ID = ID + i || false
+		this.health_point = health || 100
+		this.name = name + i || '无名战士'
+	}
+	// OneSoldier.property = {constructor: OneSoldier}
+	OneSoldier.prototype.兵种 = '美国大兵'
+	OneSoldier.prototype.攻击力 = '15'
+	OneSoldier.prototype.行走 = function(){}
+	OneSoldier.prototype.奔跑 = function(){}
+	OneSoldier.prototype.死亡 = function(){}
+	OneSoldier.prototype.攻击 = function(){}
+	OneSoldier.prototype.防御 = function(){}
+
+	new OneSoldier//创造了新的对象
+
+	var soldiers = []
+	for(var i = 0; i < 100; i++){
+		soldiers.push(new OneSoldier)//不传入参数时可以省略括号
+	}
+
+
+	// 注意：new就不要在构造函数里return了，因为默认已经return了，会覆盖。
+	// 尤其是return非对象时，等于没有写这个return（无视之）。
+
 
 
 
