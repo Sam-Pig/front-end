@@ -542,11 +542,11 @@
 	OneSoldier.prototype = new fakeHuman
 
 	// 现在的方法----这一句等于前面三句
-	OneSoldier.prototype = Object.create(Human.prototype)
+	OneSoldier.prototype = Object.create(Human.prototype)//JS之父创造了create方法指定原型
 
 
 
-	// 但是现在JS又有新方法了----class
+	// 但是现在JS又有新方法了----ES6 class 语法
 
 	class Human{
 		constructor(options){
@@ -558,7 +558,6 @@
 		excrete(){}
 		sleep(){}	
 	}
-
 	class OneSoldier extends Human{
 		constructor(options){
 			super(options)// Human.call(this,options)
@@ -577,8 +576,15 @@
 		// 攻击力 = '15'
 	}
 
+	// 最大的bug
+	typeof Human//"function"
+	Human.call()//Uncaught TypeError: Class constructor Human cannot be invoked without 'new'
+	// Human到底是什么？
+	// 这造成了一个畸形的函数。
 
-
+	// JS已经分裂成了两门语言！
+	// 一部分基于原本的原型链，一部分偏向Java的抽象。
+	
 
 
 
