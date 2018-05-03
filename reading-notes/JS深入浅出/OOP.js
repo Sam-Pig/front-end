@@ -313,7 +313,9 @@
 // 4 new
 // new 是基于一个很简单的需求----批量创建对象 而出现的。
 
-	// 从建造一个兵营说起
+	// 从建造一个兵营说起：
+
+	// 如何一次性声明100个soldier？
 	var soldiers = []
 	var soldier
 	var soldier_common = {
@@ -339,7 +341,7 @@
 	// 目前从内存层次上讲已经很完美了，但是组织上很松散，典型的意大利面条代码。
 	// 下面进行第一次重构----封装（OOP）
 
-	// 构造函数
+	// 创建构造函数
 	function createOneSoldier(){
 		var soldier = {
 				ID: i,
@@ -358,14 +360,15 @@
 		防御: function(){}
 	}
 
-
+	//使用构造函数
 	var soldiers = []
 	for(var i = 0; i < 100; i++){
 		soldiers.push(createOneSoldier())
 	}
 
+
 	// 但还是有些分散，createSoldier和soldier_common的关联性怎么保证呢？容易误删代码。
-	// 再次重构----采用一种机制，把soldier_common写成createOneSoldier的一个属性（函数也是对象）。
+	// 再次优化----采用一种机制，把soldier_common写成createOneSoldier的一个属性（函数也是对象）。
 
 	function createOneSoldier(){
 		var soldier = {
@@ -388,7 +391,10 @@
 
 	var soldiers = []
 	for(var i = 0; i < 100; i++){
-		soldiers.push(createOneSoldier())
+		soldiers.push.call(soldiers,createOneSoldier.call())
+		/*Array.property.push.call(
+			soldiers,createOneSoldier.call()
+			)*/
 	}
 
 
