@@ -224,7 +224,7 @@
 			function a(){
 				console.log(this)
 			}
-			a()//window|global
+			a()//window||global
 
 
 
@@ -312,6 +312,88 @@
 /*--------------------------------------------------------------------------------------------------------------*/
 // 4 new
 // new 是基于一个很简单的需求----批量创建对象 而出现的。
+
+	// 从建造一个兵营说起
+	var soldiers = []
+	var soldier
+	var soldier_common = {
+		兵种: '美国大兵',
+		攻击力: '15',
+		行走: function(){},
+		奔跑: function(){},
+		死亡: function(){},
+		攻击: function(){},
+		防御: function(){}
+	}
+	for(var i = 0; i < 100; i ++){
+		soldier = {
+			ID: i,
+			生命值: 45
+		}
+		soldier.__proto__ = soldier_common
+		soldiers.push(soldier)
+	}
+	soldiers//100个对象
+	soldiers[3]//{ID: 3, 生命值: 45}
+
+	// 目前从内存层次上讲已经很完美了，但是组织上很松散，典型的意大利面条代码。
+	// 下面进行第一次重构----封装（OOP）
+
+	// 构造函数
+	function createOneSoldier(){
+		var soldier = {
+				ID: i,
+				生命值: 45
+		}
+		soldier.__proto__ = soldier_common
+		return soldier
+	}
+	soldier_common = {
+		兵种: '美国大兵',
+		攻击力: '15',
+		行走: function(){},
+		奔跑: function(){},
+		死亡: function(){},
+		攻击: function(){},
+		防御: function(){}
+	}
+
+
+	var soldiers = []
+	for(var i = 0; i < 100; i++){
+		soldiers.push(createOneSoldier())
+	}
+
+	// 但还是有些分散，createSoldier和soldier_common的关联性怎么保证呢？容易误删代码。
+	// 再次重构----采用一种机制，把soldier_common写成createOneSoldier的一个属性（函数也是对象）。
+
+	function createOneSoldier(){
+		var soldier = {
+				ID: i,
+				生命值: 45
+		}
+		soldier.__proto__ = createOneSoldier.common
+		return soldier
+	}
+	createOneSoldier.common = {
+		兵种: '美国大兵',
+		攻击力: '15',
+		行走: function(){},
+		奔跑: function(){},
+		死亡: function(){},
+		攻击: function(){},
+		防御: function(){}
+	}
+
+
+	var soldiers = []
+	for(var i = 0; i < 100; i++){
+		soldiers.push(createOneSoldier())
+	}
+
+
+
+
 
 
 
