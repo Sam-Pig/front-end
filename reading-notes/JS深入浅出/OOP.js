@@ -37,7 +37,7 @@
 	// 函数也可以----animate({},'fast',2000)
 
 
-// 但面向对象解决的问题，并不是这三面红旗，而是：写代码的套路问题（定势思维）。*********************
+// 但面向对象解决的问题，并不是这三面红旗，而是：写代码的套路问题（定势思维）。
 // 你要做的，就是不要思考，有什么问题就往上靠就行了，这是宗教信仰问题，是立场问题。
 
 
@@ -206,79 +206,79 @@
 
 
 /*--------------------------------------重要结论--------------------------------------------------*/
-	// 经典三段论：
-		// 1、参数的值只有在传参的时候才能确定；
-		// 2、this是函数的第一个参数；
-		// 结论：this的值只有在传参的时候才能确定！
+			// 经典三段论：
+				// 1、参数的值只有在传参的时候才能确定；
+				// 2、this是函数的第一个参数；
+				// 结论：this的值只有在传参的时候才能确定！
 
 
-	// 面试题
-	// 指出以下情况下this的值
+			// 面试题
+			// 指出以下情况下this的值
 
-	function a(){
-		console.log(this)
-	}
-	// 不确定
-
-
-	function a(){
-		console.log(this)
-	}
-	a()//window|global
+			function a(){
+				console.log(this)
+			}
+			// 不确定
 
 
-
-	function a(){
-		'use strict'//别乱搞
-		console.log(this)
-	}
-	a()//undefined
+			function a(){
+				console.log(this)
+			}
+			a()//window|global
 
 
 
-	function a(){
-		'use strict'
-		console.log(this)
-	}
-	var obj = {
-		sayThis: a
-	}
-	obj.sayThis()//这个对象本身
-	obj.sayThis.call()//undefined（因为在严格模式下）
-	obj.sayThis,call(1)//1
-
-
-/*--------------------------------------以下都是错的----------------------------------------------*/
-
-	button.onclick =function(){
-		console.log(this)
-	}
-	//按照MDN文档，this值一定是触发事件的元素，否则就是bug。
-
-
-	$('#button').on('click',function(){
-		console.log(this)
-	})
-	// 按照jQuery文档，对于直接事件而言，this代表绑定的元素。
-	// 只有两种方式可以确定this
-	// 一个是看官方文档，一个是控制台
-		// 附：前端开发中文文档导航 cndevdocs.com
-
-
-	$('ul').on('click','li',function(){
-		console.log(this)
-	}// 按照jQuery文档，对于事件代理而言，this代表与selector相匹配的元素（即li）。
+			function a(){
+				'use strict'//别乱搞
+				console.log(this)
+			}
+			a()//undefined
 
 
 
-	new Vue({
-		data: function(){
-			console.log(this)
-		}
-	})
-	// Vue文档：this指new出来的对象
+			function a(){
+				'use strict'
+				console.log(this)
+			}
+			var obj = {
+				sayThis: a
+			}
+			obj.sayThis()//这个对象本身
+			obj.sayThis.call()//undefined（因为在严格模式下）
+			obj.sayThis,call(1)//1
 
-/*--------------------------------------以上都是错的-----------------------------------------------*/
+
+		/*--------------------------------------以下都是错的----------------------------------------------*/
+
+			button.onclick =function(){
+				console.log(this)
+			}
+			//按照MDN文档，this值一定是触发事件的元素，否则就是bug。
+
+
+			$('#button').on('click',function(){
+				console.log(this)
+			})
+			// 按照jQuery文档，对于直接事件而言，this代表绑定的元素。
+			// 只有两种方式可以确定this
+			// 一个是看官方文档，一个是控制台
+				// 附：前端开发中文文档导航 cndevdocs.com
+
+
+			$('ul').on('click','li',function(){
+				console.log(this)
+			}// 按照jQuery文档，对于事件代理而言，this代表与selector相匹配的元素（即li）。
+
+
+
+			new Vue({
+				data: function(){
+					console.log(this)
+				}
+			})
+			// Vue文档：this指new出来的对象
+
+		/*--------------------------------------以上都是错的-----------------------------------------------*/
 
 
 
@@ -286,10 +286,10 @@
 	// 3.4 拨乱反正 ---------------------------------------------------------------------------
 
 	// this的最大特性，就是不确定性。
-	// 在ES6，JS痛改前非、拨乱反正，利用箭头函数彻底抹杀了this，这说明JS走出了自己的一条路，已不是当年依附在Java羽翼下的小脚本语言了。
-	var f = () => {console.log(this,arguments[0]}//this和arguments都被废了，只能显示地传入参数
+	// 在ES6，JS痛改前非、拨乱反正，利用箭头函数彻底抹杀了this的特殊地位，这说明JS走出了自己的一条路，已不是当年依附在Java羽翼下的小脚本语言了。
+	var f = () => {console.log(this,arguments[0])}//this和arguments都被废了，只能显示地传入参数
 	f()//window
-	f.call(1,2,3)//window
+	f.call(1,2,3)// Uncaught ReferenceError: arguments is not defined
 	// call()的第一个参数已经被禁用了
 
 
