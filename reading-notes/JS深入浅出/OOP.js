@@ -490,6 +490,94 @@
 
 
 
+/*--------------------------------------------------------------------------------------------------------------*/
+// 5 继承
+
+// 前面都是在打基础，到这里，才是真的面向对象。
+// JS继承其实很简单，就是__proto__指向一个对象咯！
+// JS的类是什么？就是构造函数咯！
+// 所以，当一个面试官跟你说继承时，他其实是在和你说Java的继承。
+
+	// 如何实现士兵继承人类的公有属性和自有属性？
+
+	function Human(options){
+		this.name = options.name || '佚名'
+		this.skin = options.skin || '肤色不明'
+	}
+	Human.prototype.eat = function(){}
+	Human.prototype.drink = function(){}
+	Human.prototype.excrete = function(){}
+	Human.prototype.sleep = function(){}
+
+
+	function OneSoldier(options){
+		Human.call(this,options)//把此构造函数里的this传给Human里的this，此举实现了继承Human的自有属性
+		this.ID = options.ID || 'ID不明'
+		this.health_point = options.health || '生命值不明'
+	}
+	OneSoldier.prototype.兵种 = 'PLA'
+	OneSoldier.prototype.攻击力 = '15'
+	OneSoldier.prototype.行走 = function(){}
+	OneSoldier.prototype.奔跑 = function(){}
+	OneSoldier.prototype.死亡 = function(){}
+	OneSoldier.prototype.攻击 = function(){}
+	OneSoldier.prototype.防御 = function(){}
+	OneSoldier.prototype.__proto__ = Human.prototype//在士兵的公有属性上再添加公有属性，此举就是实现了继承Hunman的公有属性
+
+	new OneSoldier({
+		name: 'Sam',
+		skin: 'yellow',
+		ID: 0011,
+		health: 111
+	})//OneSoldier {name: "Sam", skin: "yellow", ID: 9, health_point: 111}
+
+
+	// 这段代码的问题：
+	// 1、__proto__不能用
+	// OneSoldier.prototype.__proto__ = Human.prototype
+	// 怎么不写__proto__来实现这句？
+	// 用这三行代码（古老的技巧）：
+	function fakeHuman(){}
+	fakeHuman.prototype = Human.prototype
+	OneSoldier.prototype = new fakeHuman
+
+	// 现在的方法----这一句等于前面三句
+	OneSoldier.prototype = Object.create(Human.prototype)
+
+
+
+	// 但是现在JS又有新方法了----class
+
+	class Human{
+		constructor(options){
+			this.name = options.name || '佚名'
+			this.skin = options.skin || '肤色不明'
+		}
+		eat(){}
+		drink(){}
+		excrete(){}
+		sleep(){}	
+	}
+
+	class OneSoldier extends Human{
+		constructor(options){
+			super(options)// Human.call(this,options)
+			this.ID = options.ID || 'ID不明'
+			this.health_point = options.health || '生命值不明'
+			this.arm_of_services= options.arm_of_services || '兵种不明'
+			this.damage = options.damage || '攻击力不明'
+		}
+		行走(){}
+		奔跑(){}
+		死亡(){}
+		攻击(){}
+		防御(){}
+		// class不支持非函数作为公有属性
+		// 兵种 = 'PLA'
+		// 攻击力 = '15'
+	}
+
+
 
 
 
