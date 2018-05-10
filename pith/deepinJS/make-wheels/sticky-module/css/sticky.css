@@ -1,9 +1,13 @@
+.sticky {
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+/*-----------------------以上为Sticky组件默认要写的代码----------------------------------*/
+
 * {
 	margin: 0;
 	padding: 0;
-}
-.topbarPlaceholder {
-	height: 60px;
 }
 #topbar {
 	background: green;
@@ -12,19 +16,10 @@
 	text-align: center;
 }
 #topbar.sticky {
-	position: fixed;
-	top: 0;
-	left: 0;
 	width: 100%;
-	opacity: 0.5;
 }
 main {
 	background: #ddd;
-	height: 800px;
+	height: 1600px;
 	margin-top: 30px;
-}
-button.sticky {
-	position: fixed;
-	top: 60px;
-	left: 0;
 }
