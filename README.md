@@ -1,5 +1,5 @@
 ## 综合项目demo
-[在线todo-list](https://sam-pig.github.io/front-end/projects/online-todo-list/index.html)
+[在线todo-list](https://sam-pig.github.io/front-end/projects/jquery-online-todo-list/index.html)
 
 ## JS练习demo
 
