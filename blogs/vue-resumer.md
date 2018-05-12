@@ -174,9 +174,9 @@ main {
 来引用，把`<Topbar/>`放在`<template><template/>`中你想要放置的位置，再通过`<style><style/>`来统筹App.vue的总体样式。
 
 * 以上是第一种引用标签的方式，即`import`它，还有一种方式：  
-    ~~全局注册标签~~（少用）
+    **全局注册标签**（少用）
 
-* 我们可以在main.js文件**`new Vue`之前**，注册一个标签：
+* 我们可以在main.js文件`new Vue`之前，注册一个标签：
 
 ```
 import Vue from 'vue'
@@ -202,8 +202,12 @@ new Vue({
 
 * 这样，就可以直接在App.vue的`<template><template/>`里面添加`<Jack/>`了，就相当于是添加了子标签`<p>I am {{name}}</p>`；
 
-
-
+* 另外，还可以把components里的单文件组件在main.js里给注册成全局标签：
+```
+import Hello from './components/HelloWorld'
+Vue.component('Hello',Hello)
+```
+这样，HelloWorld.vue就可以不用在App.vue里`import`就直接放入`<template><template/>`里用了；
 
 
 
