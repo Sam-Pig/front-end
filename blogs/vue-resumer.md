@@ -98,7 +98,7 @@ new Vue({
 
 **基本认识：index.html是HTML的入口文件，main.js是JS的入口文件，后者会自动注入到前者。**
 
-进入./App.vue：
+进入`./App.vue`（这是已经修改过的文件）：
 ```
 <template>
   <div id="app">
@@ -150,7 +150,7 @@ main {
 </style>
 ```
 
-
+可以发现`.vue`后缀的文件结构，就是`<template><template/>`、`<script><script/>`、`<style><style/>`三个根标签组成的。
 
 
 
