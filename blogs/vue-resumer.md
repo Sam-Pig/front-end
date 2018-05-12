@@ -1,4 +1,6 @@
-## 日志——Vue开发在线简历生成器备忘
+## 日志——通过Vue.js开发在线简历生成器学习Vue
+
+### 准备工作
 
 在github上新建一个仓库vue-resumer-1；
 
@@ -31,6 +33,8 @@ clone到本地；
 输入`npm install`;
 
 push到github上，添加描述`git commit -am "vue init webpack . && npm install"`；
+
+### 正式开始
 
 输入`npm run dev`，创建了[本地服务器](http://localhost:8080/)，可以访问页面；
 
@@ -69,7 +73,11 @@ push到github上，添加描述`git commit -am "vue init webpack . && npm instal
 </html>
 ```
 
-对比发现，vue自动在HTML的<body/>前添加了一个JS脚本，`src="/app.js"`；
+对比发现，vue自动在HTML的`<body/>`前添加了一个JS脚本，其`src="/app.js"`；
+
+
+
+
 
 
 
