@@ -77,7 +77,7 @@ push到github上，添加描述`git commit -am "vue init webpack . && npm instal
 
 对比发现，vue自动在HTML的`<body/>`前注入（inject）了一个JS脚本，其`src="/app.js"`；
 
-打开`./src/`，发现只有assets、components、App.vue和main.js四个文件（夹）；
+进入`./src/`，发现只有assets、components、App.vue和main.js四个文件（夹）；
 
 打开main.js，
 ```
@@ -95,6 +95,8 @@ new Vue({
   template: '<App/>'
 })
 ```
+
+**基本认识：index.html是HTML的入口文件，main.js是JS的入口文件，后者会自动注入到前者。**
 
 
 
