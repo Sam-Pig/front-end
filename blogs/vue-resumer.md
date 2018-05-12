@@ -1,4 +1,4 @@
-## 日志——用vue实现在线简历生成器全步骤记录
+## 日志——Vue开发在线简历生成器备忘
 
 在github上新建一个仓库vue-resumer-1；
 
@@ -32,11 +32,11 @@ clone到本地；
 
 push到github上，添加描述`git commit -am "vue init webpack . && npm install"`；
 
-输入`npm run dev`，创建了[本地服务器](http://localhost:8080/)；
+输入`npm run dev`，创建了[本地服务器](http://localhost:8080/)，可以访问页面；
 
 打开VScode，进入本地仓库vue-resumer-1，查看目录结构；
 
-进入index.html，
+找到并进入index.html，发现HTML结构怪异：
 ```
 <!DOCTYPE html>
 <html>
@@ -52,6 +52,24 @@ push到github上，添加描述`git commit -am "vue init webpack . && npm instal
 </html>
 ```
 
+检查http://localhost:8080 页面，发现文档结构是这样的：
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>vue-resumer-1</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <script type="text/javascript" src="/app.js"></script>
+  </body>
+</html>
+```
+
+对比发现，vue自动在HTML的<body/>前添加了一个JS脚本，`src="/app.js"`；
 
 
 
