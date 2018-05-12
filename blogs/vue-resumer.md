@@ -42,7 +42,7 @@ push到github上，添加描述`git commit -am "vue init webpack . && npm instal
 
 打开VScode，进入本地仓库vue-resumer-1，查看目录结构；
 
-找到并进入index.html，发现HTML结构怪异：
+找到并打开index.html，发现HTML结构怪异：
 ```
 <!DOCTYPE html>
 <html>
@@ -75,7 +75,26 @@ push到github上，添加描述`git commit -am "vue init webpack . && npm instal
 </html>
 ```
 
-对比发现，vue自动在HTML的`<body/>`前添加了一个JS脚本，其`src="/app.js"`；
+对比发现，vue自动在HTML的`<body/>`前注入（inject）了一个JS脚本，其`src="/app.js"`；
+
+打开`./src/`，发现只有assets、components、App.vue和main.js四个文件（夹）；
+
+打开main.js，
+```
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import Vue from 'vue'
+import App from './App'
+
+Vue.config.productionTip = false
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  components: { App },
+  template: '<App/>'
+})
+```
 
 
 
