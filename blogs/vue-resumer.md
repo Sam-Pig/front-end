@@ -1,4 +1,4 @@
-## 日志——通过Vue.js开发在线简历生成器学习Vue
+## 日志——Vue.js开发在线简历生成器
 
 ### 准备工作
 
@@ -34,7 +34,9 @@
 
 * push到github上，添加描述`git commit -am "vue init webpack . && npm install"`；
 
+
 ***
+
 
 ### 正式开始
 
@@ -58,7 +60,7 @@
 </html>
 ```
 
-* 检查http://localhost:8080 页面，发现文档结构是这样的：
+* 检查http://localhost:8080 页面，发现浏览器里实时文档结构是这样的：
 ```
 <!DOCTYPE html>
 <html>
@@ -158,7 +160,20 @@ main {
 
 * `.vue`结尾的文件，叫做“单文件组件”，除了App.vue之外，都放在了components文件夹里面；
 
-* 可以自己写一个单文件组件，如Topbar.vue，放在components文件夹里，然后通过App.vue里的`<script><script/>`来引用，把<Topbar/>放在`<template><template/>`中你想要放置的位置，再通过`<style><style/>`来统筹App.vue的总体样式。
+* 可以自己写一个单文件组件，如Topbar.vue，放在components文件夹里，然后通过App.vue里的
+```
+<script>
+    import Topbar from './components/Topbar'
+    export default{
+        components: {
+            "Topbar": Topbar
+        }
+    }
+<script/>
+```
+来引用，把`<Topbar/>`放在`<template><template/>`中你想要放置的位置，再通过`<style><style/>`来统筹App.vue的总体样式。
+
+* 
 
 
 
