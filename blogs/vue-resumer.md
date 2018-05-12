@@ -79,7 +79,7 @@
 
 * 进入`./src/`，发现只有assets、components、App.vue和main.js四个文件（夹）；
 
-* 打开main.js，
+* 打开main.js：
 ```
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -91,14 +91,14 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',//容器
-  components: { App },
+  components: { App },//ES6写法
   template: '<App/>'//HTML文档
 })
 ```
 
 *  **基本认识：index.html是HTML的入口文件，main.js是JS的入口文件，后者会自动注入到前者。**
 
-* 进入`./App.vue`（这是已经修改过的文件）：
+* 打开App.vue（这是已经修改过的文件）：
 ```
 <template>
   <div id="app">
@@ -153,9 +153,12 @@ main {
 * 可以发现`.vue`后缀的文件结构，就是`<template><template/>`、`<script><script/>`、`<style><style/>`三个根标签组成的。
 
 * `<template><template/>`里面是关于文档的总体结构；  
-    `<script><script/>`里面是配置要引入的组件；
+    `<script><script/>`里面是配置要引入的组件；  
     `<style><style/>`里面是设置样式；
 
+* `.vue`结尾的文件，叫做“单文件组件”，除了App.vue之外，都放在了components文件夹里面；
+
+* 
 
 
 
