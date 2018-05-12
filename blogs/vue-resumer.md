@@ -111,7 +111,7 @@ new Vue({
 </template>
 
 <script>
-import Topbar from './components/Topbar'
+import Topbar from './components/Topbar'//不写后缀也无所谓，因为它会自行查找
 import Editor from './components/Editor'
 import Preview from './components/Preview'
 
@@ -152,13 +152,13 @@ main {
 
 * 可以发现`.vue`后缀的文件结构，就是`<template><template/>`、`<script><script/>`、`<style><style/>`三个根标签组成的。
 
-* `<template><template/>`里面是关于文档的总体结构；  
+* `<template><template/>`里面是关于文档的总体结构，这里的语法实际上是XML；  
     `<script><script/>`里面是配置要引入的组件；  
     `<style><style/>`里面是设置样式；
 
 * `.vue`结尾的文件，叫做“单文件组件”，除了App.vue之外，都放在了components文件夹里面；
 
-* 
+* 可以自己写一个单文件组件，如Topbar.vue，放在components文件夹里，然后通过App.vue里的`<script><script/>`来引用，把<Topbar/>放在`<template><template/>`中你想要放置的位置，再通过`<style><style/>`来统筹App.vue的总体样式。
 
 
 
