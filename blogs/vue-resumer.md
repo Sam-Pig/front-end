@@ -209,5 +209,9 @@ Vue.component('Hello',Hello)
 ```
 这样，HelloWorld.vue就可以不用在App.vue里`import`就直接放入`<template><template/>`里用了；
 
-
+* 总结一下：
+    1. index.html是HTML的入口文件，main.js是JS的入口文件，后者会自动注入到前者；
+    2. main.js主要负责`import`全局变量和`new Vue`；
+    3. App.vue负责`import`各component，整合APP的整体template和设置style；
+    4. 各component放入components文件里，每一个都是一个单文件组件，可以被App.vue和main.js`import`。
 
