@@ -32,7 +32,7 @@ clone到本地；
 
 push到github上，添加描述`git commit -am "vue init webpack . && npm install"`；
 
-输入`npm run dev`，打开了（http://localhost:8080/）；
+输入`npm run dev`，打开了http://localhost:8080/；
 
 
 
