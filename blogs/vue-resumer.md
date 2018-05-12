@@ -30,4 +30,8 @@ clone到本地；
 
 输入`npm install`;
 
+push到github上，添加描述`git commit -am "vue init webpack . && npm install"`；
+
+
+
 
