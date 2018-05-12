@@ -90,13 +90,65 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
+  el: '#app',//容器
   components: { App },
-  template: '<App/>'
+  template: '<App/>'//HTML文档
 })
 ```
 
 **基本认识：index.html是HTML的入口文件，main.js是JS的入口文件，后者会自动注入到前者。**
+
+进入./App.vue：
+```
+<template>
+  <div id="app">
+    <Topbar class="topbar"/>
+    <main>
+      <Editor class="editor"/>
+      <Preview class="preview"/>   
+    </main>
+  </div>
+</template>
+
+<script>
+import Topbar from './components/Topbar'
+import Editor from './components/Editor'
+import Preview from './components/Preview'
+
+export default {
+  components: {
+    Topbar,
+    Editor,
+    Preview
+  }
+}
+</script>
+
+<style lang="scss">
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.topbar {
+  background-color: red;
+}
+main {
+  background-color: blue;
+  display: flex;
+  flex: 1;
+  > .editor {
+    width: 20em;
+  }
+  > .preview {
+    flex: 1;
+  }
+}
+</style>
+```
 
 
 
