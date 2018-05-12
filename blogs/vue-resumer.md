@@ -16,17 +16,17 @@ clone到本地；
 
 一路选择Y；
 
-要你选择Runtime + Compiler或者Runtime-only，前者适合浏览器环境（Compiler就是把HTML变成JS再把JS反馈到页面中），后者适合nodejs环境，这里选择前者；
+提示你选择Runtime + Compiler或者Runtime-only，前者适合浏览器环境（Compiler就是把HTML变成JS再把JS反馈到页面中），后者适合nodejs环境，这里选择前者；
 
-提示`Install vue-router?`选择n，因为手动安装更容易理解；
+提示`Install vue-router?`，选择n，因为手动安装更容易理解；
 
-提示`Use ESLint to lint your code?`选择n，因为ESLint有许多奇奇怪怪的规则，第二次使用时就可以Use了；
+提示`Use ESLint to lint your code?`，选择n，因为ESLint有许多奇奇怪怪的规则，第二次使用时就可以Use了；
 
-提示`Setup unit tests with Karma + Mocha?`选择n，很多公司是不写单元测试的，所以也不选；
+提示`Setup unit tests with Karma + Mocha?`，选择n，很多公司是不写单元测试的，所以也不选；
 
-提示`Setup e2e tests with Nightwatch?`选择n。
+提示`Setup e2e tests with Nightwatch?`，选择n。
 
-提示`vue-cli  Generated "vue-resumer-1".`告诉你已经生成；
+提示`vue-cli  Generated "vue-resumer-1".`，告诉你已经生成；
 
 输入`npm install`;
 
