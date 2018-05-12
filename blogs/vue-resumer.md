@@ -173,7 +173,9 @@ main {
 ```
 来引用，把`<Topbar/>`放在`<template><template/>`中你想要放置的位置，再通过`<style><style/>`来统筹App.vue的总体样式。
 
-* 
+* 以上是第一种引用标签的方式，即import它，还有一种方式：  
+    ～～全局注册标签～～
+    
 
 
 
