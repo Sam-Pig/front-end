@@ -10,3 +10,4 @@
 
 5、输入`npm install -g vue-cli`下载安装[vue-cli命令行工具](https://github.com/vuejs/vue-cli)；
 
+6、输入`vue init <template-name> <project-name>`，这里就输入`vue init webpack .`即可；
