@@ -152,7 +152,9 @@ main {
 
 * 可以发现`.vue`后缀的文件结构，就是`<template><template/>`、`<script><script/>`、`<style><style/>`三个根标签组成的。
 
-
+* `<template><template/>`里面是关于文档的总体结构；  
+    `<script><script/>`里面是配置要引入的组件；
+    `<style><style/>`里面是设置样式；
 
 
 
